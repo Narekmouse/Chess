@@ -1,5 +1,5 @@
 #include <iostream>
-#include <cstring>
+#include <cstring>//չգիտեմ ինչու ա սա ստեղ
 using namespace std;
 
 class BOARD {
@@ -12,11 +12,11 @@ private:
 };
 //______________________________________________________________________________________________________________________________________
 
-void BOARD::start ()
+void BOARD::start ()//բոլոր քրերին տալիս ա արժեքներ ու դնում իրանց սկզբնական դիրքում
 {
   for( int i=1; i<9 ; i++)
-	  for( int j=1; j<9 ; j++)
-		board[i][j]=0;
+for( int j=1; j<9 ; j++)
+board[i][j]=0;
 //-------------------------------------------------------------------white
   board[1][1]= board[1][8]=15;
   board[1][2]= board[1][7]=13;
@@ -40,28 +40,29 @@ void BOARD::print ()
   cout<<"   "<<" A "<<" "<<" B "<<" "<<" C "<<" "<<" D "<<" "<<" E "<<" "<<" F "<<" "<<" G "<<" "<<" H "<<endl;
        cout<<"------------------------------------"<<endl;
   for( int i=1; i<9 ; i++)
-     {  cout<<i<<"| ";
-	  for( int j=1; j<9 ; j++)
+     { cout<<i<<"| ";
+for( int j=1; j<9 ; j++)
           {
-	    if (board[i][j]==0) {cout<<" "<<"  "<<"|";};
-//-------------------------------------------------------------------white
-	   if (board[i][j]==11) {cout<<"(p)"<<"|";}//pawn
-	   if (board[i][j]==15) {cout<<"(R)"<<"|";}//Rook
-	   if (board[i][j]==13) {cout<<"(K)"<<"|";}//Knight
-	   if (board[i][j]==14) {cout<<"(B)"<<"|";}//Bishop
-	   if (board[i][j]==100) {cout<<"(Q)"<<"|";}//Queen
-	   if (board[i][j]==1000) {cout<<"(+)"<<"|";}//King
-//-------------------------------------------------------------------Black
-	   if (board[i][j]==21) {cout<<"{p}"<<"|";}//pawn
-	   if (board[i][j]==25) {cout<<"{R}"<<"|";} //Rook
-	   if (board[i][j]==23) {cout<<"{K}"<<"|";}//Knight 
-	   if (board[i][j]==24) {cout<<"{B}"<<"|";} 
-	   if (board[i][j]==200) {cout<<"{Q}"<<"|";}
-	   if (board[i][j]==2000) {cout<<"{+}"<<"|";} 
-	  }
+if (board[i][j]==0) {cout<<" "<<"  "<<"|";};
+if (board[i][j]==1) {cout<<" * "<<"|";}
+//-------------------------------------------------------------------white֊սպիտակներ
+if (board[i][j]==11) {cout<<"(p)"<<"|";}//pawn―ինվոր 
+if (board[i][j]==15) {cout<<"(R)"<<"|";}//Rook―
+if (board[i][j]==13) {cout<<"(K)"<<"|";}//Knight―Ձի
+if (board[i][j]==14) {cout<<"(B)"<<"|";}//Bishop
+if (board[i][j]==100) {cout<<"(Q)"<<"|";}//Queen―Թագուհի
+if (board[i][j]==1000) {cout<<"(+)"<<"|";}//King―Արքա
+//-------------------------------------------------------------------Black֊Սևեր
+if (board[i][j]==21) {cout<<"{p}"<<"|";}//pawn
+if (board[i][j]==25) {cout<<"{R}"<<"|";} //Rook
+if (board[i][j]==23) {cout<<"{K}"<<"|";}//Knight
+if (board[i][j]==24) {cout<<"{B}"<<"|";}
+if (board[i][j]==200) {cout<<"{Q}"<<"|";}
+if (board[i][j]==2000) {cout<<"{+}"<<"|";}
+}
        cout<<"|"<<i<<endl<<"-------------------------------------"<<endl;
-     } 
-cout<<"   "<<" A "<<" "<<" B "<<" "<<" C "<<" "<<" D "<<" "<<" E "<<" "<<" F "<<" "<<" G "<<" "<<" H "<<endl;
+     }
+cout<<" "<<" A "<<" "<<" B "<<" "<<" C "<<" "<<" D "<<" "<<" E "<<" "<<" F "<<" "<<" G "<<" "<<" H "<<endl;
 }
 
 //_________________________________________________________________________________________
@@ -70,32 +71,37 @@ class PLAYER
 
  public:
  void GO(BOARD& ys){ ys.board[5][6]=15;};
- void Move(BOARD& ys) 
-		{ int i,j,a,b;
-			cout<<":from";
-			cin>>i>>j;cout<<"to";cin>>a>>b ; 
-			ys.board[a][b]=ys.board[i][j];
-			ys.board[i][j]=0;
-		};
+ void Move(BOARD& ys)
+{ 	int i,j,a,b;
+	cout<<":from";
+	cin>>i>>j;
+	 if (ys.board[i][j]==11) {ys.board[i+1][j]=ys.board[i+2][j]=1;}; ys.print();
+	cout<<"to";cin>>a>>b ;
+	ys.board[a][b]=ys.board[i][j];
+	ys.board[i][j]=0;
+};
 };
 
 
-int main () 
+int main ()
 {
 
   BOARD game;
   PLAYER gamer;
   game.start ();
   game.print();
-//  gamer.GO(game);
+// gamer.GO(game);
   for (int N=1 ; ;)
-{ 
-	cout<<"Player"<<N<<endl;
-	gamer.Move(game);
-	game.print(); 
-	if (N==1){N++;}
-	else {N--;};
+{
+cout<<"Player"<<N<<endl;
+gamer.Move(game);
+game.print();
+if (N==1){N++;}
+else {N--;};
 }
   return 0;
 } 
 	
+
+
+
